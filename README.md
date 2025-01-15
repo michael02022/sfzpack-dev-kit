@@ -7,7 +7,7 @@ These are vainilla python3 scripts.
 Parse the cue data of wav files into separated wav files.
 
 ## multisample2sfz
-Converts Bitwig multisample format into sfz **MAPPING** (no additional opcodes, just the ones to define the mapping), used to port NKI libraries to SFZ with [ConvertWithMoss](https://www.mossgrabers.de/Software/ConvertWithMoss/ConvertWithMoss.html)
+Converts Bitwig multisample format into sfz **MAPPING** (no additional opcodes, just the ones to define the mapping), used to port NKI libraries to SFZ with [ConvertWithMoss](https://www.mossgrabers.de/Software/ConvertWithMoss/ConvertWithMoss.html) with injected sample metadata (loop points)
 
 Just run the script in a folder with multisample files.
 
