@@ -43,5 +43,62 @@ A tool where parses normal SFZ files into the lowest SFZ common denominator (onl
 
 ### These are not perfect scripts, but it saves a lot of time when developing a SFZpack, overtime I'll try to improve them depending of my experiences when porting sample libraries
 
+## HOW TO CONVERT SFZpack FROM WAV TO FLAC (and vice versa)
 
+### Requirements
+1. flac CLI tool
+2. Bash
+
+### INSTRUCTIONS
+1. Install flac command line tool
+
+https://xiph.org/flac/download.html
+
+#### Windows
+2. Install [Git for Windows](https://git-scm.com/downloads/win) to use Bash commands in Windows file system.
+3. After you download the flac tool, put the .EXE file on any folder you like
+
+4. Open start menu
+5. Type Edit environment variables
+6. Open the option Edit the system environment variables
+7. Click "Environment variables" button
+8. There you see two boxes, in System Variables box find `Path` variable
+9. Click Edit
+10. a window pops up, click New
+11. Copy the path folder/directory where the flac tool is in there and paste it.
+12. Click OK
+
+To verify, open Git Bash and type `flac` to see if it was installed correctly.
+
+#### macOS
+
+Using [homebrew](https://brew.sh/), run `brew install flac`
+
+#### Linux
+
+Use whatever install package command from your distro as sudo and type `flac`.
+
+Ubuntu/Debian: `sudo apt-get install flac`
+
+Arch: `sudo pacman -S flac`
+
+And so on.
+
+### COMMANDS
+
+These commands must be run in the root folder where all SFZ and WAV files are in. Be patient, it will take time.
+
+* **ENCODE FROM WAV -> FLAC (BASH):**
+
+`find -type f -iname '*.wav' -print0 | while read -d $'\0' FILE ; do flac --delete-input-file --keep-foreign-metadata --compression-level-8 "$FILE" ; done`
+
+* **DECODE FROM FLAC -> WAV (BASH):**
+
+`find -type f -iname '*.flac' -print0 | while read -d $'\0' FILE ; do flac -d "$FILE" --delete-input-file --keep-foreign-metadata; done`
+
+* **CHANGE .wav EXTENSION FROM SFZ FILES TO .flac EXTENSION IN SAMPLE OPCODE (BASH)**
+
+`find -type f -iname '*.sfz' -print0 | while read -d $'\0' FILE ; do sed -r 's/\.wav/\.flac/g' -i "${FILE}"; done`
+
+(swap the extension names to make them back to wav)
 
